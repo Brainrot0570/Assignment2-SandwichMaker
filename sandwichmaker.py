@@ -96,5 +96,10 @@ while True:
         print(f"Bread: {machine.machine_resources['bread']} slice(s)")
         print(f"Ham: {machine.machine_resources['ham']} slice(s)")
         print(f"Cheese: {machine.machine_resources['cheese']} pound(s)")
-    else:
-        print(f"Order: {order}")
+    elif order in recipes:  # if the input matches an order
+        ingredients = recipes[order]["ingredients"]  # set ingredients to the ingredients for this sandwich
+        cost = recipes[order]["cost"]  # set cost to cost for this size sandwich
+        if machine.check_resources(ingredients):  # if machine has enough ingredients
+            coins = machine.process_coins()  # take money input
+            if machine.transaction_result(coins, cost):  # if money is enough, give change; if not enough, reject
+                machine.make_sandwich(order, ingredients)  # make sandwich and change ingredient amounts in machine

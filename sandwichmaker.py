@@ -85,3 +85,16 @@ class SandwichMachine:
 
 
 ### Make an instance of SandwichMachine class and write the rest of the codes ###
+
+machine = SandwichMachine(resources)
+
+while True:
+    order = input("What would you like? \n(small / medium / large / off / report)\nEnter Selection: ").lower()
+    if order == "off":
+        break
+    elif order == "report":
+        print(f"Bread: {machine.machine_resources['bread']} slice(s)")
+        print(f"Ham: {machine.machine_resources['ham']} slice(s)")
+        print(f"Cheese: {machine.machine_resources['cheese']} pound(s)")
+    else:
+        print(f"Order: {order}")

@@ -38,6 +38,7 @@ resources = {
 
 class SandwichMachine:
 
+    #nothing to change here
     def __init__(self, machine_resources):
         """Receives resources as input.
            Hint: bind input variable to self variable"""
@@ -45,17 +46,42 @@ class SandwichMachine:
 
     def check_resources(self, ingredients):
         """Returns True when order can be made, False if ingredients are insufficient."""
+        for item in ingredients:
+            if ingredients[item] > self.machine_resources[item]:
+                print(f"Sorry, there is not enough {item}.")
+                return False        #if there is not enough of any item, return false
+        return True     #every item has been checked, return true
 
     def process_coins(self):
         """Returns the total calculated from coins inserted.
            Hint: include input() function here, e.g. input("how many quarters?: ")"""
+        print("Please insert coins.")
+        """Enter the amount of coins as whole numbers, the count is then multiplied
+        by the coin's value"""
+        large_dollars = int(input("How many large dollars?: "))
+        half_dollars = int(input("How many half dollars?: ")) * 0.5
+        quarters = int(input("How many quarters?: ")) * 0.25
+        nickels = int(input("How many nickels?: ")) * 0.05
+        return large_dollars + half_dollars + quarters + nickels
+
 
     def transaction_result(self, coins, cost):
         """Return True when the payment is accepted, or False if money is insufficient.
            Hint: use the output of process_coins() function for cost input"""
+        if coins < cost:
+            print("Sorry that's not enough money. Money refunded.")
+            return False
+        change = coins - cost   #compute change
+        print(f"Here is ${change} in change.")
+        return True
+
 
     def make_sandwich(self, sandwich_size, order_ingredients):
         """Deduct the required ingredients from the resources.
            Hint: no output"""
+        for item in order_ingredients:
+            self.machine_resources[item] -= order_ingredients[item]
+        print(f"{sandwich_size} sandwich is ready. Bon appetit!")
+
 
 ### Make an instance of SandwichMachine class and write the rest of the codes ###
